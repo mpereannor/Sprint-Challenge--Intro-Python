@@ -23,10 +23,10 @@
 class Vehicle: 
   pass
 
-class FlightVehicle: 
+class FlightVehicle(Vehicle): 
   pass
 
-class Starship: 
+class Starship(FlightVehicle): 
   pass
 
 #child class
@@ -40,5 +40,5 @@ class Airplane(FlightVehicle):
 class Car(GroundVehicle):
   pass
 
-class MotorCycle(GroundVehicle):
+class Motorcycle(GroundVehicle):
   pass
