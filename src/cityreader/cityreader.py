@@ -30,10 +30,11 @@ def cityreader(cities=[]):
   # TODO Implement the functionality to read from the 'cities.csv' file
   # For each city record, create a new City instance and add it to the 
   # `cities` list
-  with open('src/cityreader/cities.csv', newline= '') as csvfile:
-    city_reader = csv.reader(csvfile)
+  with open('src/cityreader/cities.csv',) as csvfile:
+    city_reader = csv.reader(csvfile, delimiter=',')
+    next(city_reader)
     for row in city_reader:
-      cities.append(City(row[0], row[3], row[4]))
+      cities.append(City(row[0], (row[3]), (row[4])))
     return cities
 
 cityreader(cities)
@@ -80,13 +81,35 @@ square_input = """
 +--------------+------------+
 """
 
+def welcome():
+  return input('enter your coorndinates, Press Enter to continue')
+
+import re
+def converter(info):
+  newInfo = re.split(',',info)
+  print(newInfo)
+  return newInfo
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
+  welcome()
+  while True:
+    user_input =  input('Enter lat1, lon1:\n')
+    user_input_b =  input('Enter lat2,lon2:\n')
+      
+    coordinates = converter(user_input)
+    coordinates_b = converter(user_input_b)
+    lat1  = float(coordinates[0])
+    lon1  = float(coordinates[1])
+    lat2  = float(coordinates_b[0])
+    lon2  = float(coordinates_b[1])
+    
+    
+  
+  
   # within will hold the cities that fall within the specified region
   within = []
 
   # TODO Ensure that the lat and lon valuse are all floats
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
-
   return within
