@@ -1,7 +1,15 @@
 # Create a class to hold a city location. Call the class "City". It should have
 # fields for name, lat and lon (representing latitude and longitude).
 
-
+class City:
+  def __init__(self, name, lat, lon):
+    self.name = name
+    self.lat = float(lat)
+    self.lon = float(lon)
+    
+  def __str__(self):
+    return f'City: {self.name}, Latitude: {self.lat}, Longitude: {self.lon}'
+    
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
 #
@@ -14,13 +22,19 @@
 #
 # Note that the first line of the CSV is header that describes the fields--this
 # should not be loaded into a City object.
+import csv
+
 cities = []
 
 def cityreader(cities=[]):
   # TODO Implement the functionality to read from the 'cities.csv' file
   # For each city record, create a new City instance and add it to the 
   # `cities` list
-    
+  with open('src/cityreader/cities.csv',) as csvfile:
+    city_reader = csv.reader(csvfile, delimiter=',')
+    next(city_reader)
+    for row in city_reader:
+      cities.append(City(row[0], (row[3]), (row[4])))
     return cities
 
 cityreader(cities)
@@ -59,13 +73,43 @@ for c in cities:
 # Salt Lake City: (40.7774,-111.9301)
 
 # TODO Get latitude and longitude values from the user
+square_input = """
++--------------+------------+
+|  lat1        | lon2       |
++--------------+------------+
+|  lat2        | lon1       |
++--------------+------------+
+"""
+
+def welcome():
+  return input('enter your coorndinates, Press Enter to continue')
+
+import re
+def converter(info):
+  newInfo = re.split(',',info)
+  print(newInfo)
+  return newInfo
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
+  welcome()
+  while True:
+    user_input =  input('Enter lat1, lon1:\n')
+    user_input_b =  input('Enter lat2,lon2:\n')
+      
+    coordinates = converter(user_input)
+    coordinates_b = converter(user_input_b)
+    lat1  = float(coordinates[0])
+    lon1  = float(coordinates[1])
+    lat2  = float(coordinates_b[0])
+    lon2  = float(coordinates_b[1])
+    
+    
+  
+  
   # within will hold the cities that fall within the specified region
   within = []
 
   # TODO Ensure that the lat and lon valuse are all floats
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
-
   return within
